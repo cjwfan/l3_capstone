@@ -17,12 +17,13 @@ export default function BookForm({
   setRating,
   notes,
   setNotes,
+  handleSubmit,
 }) {
   return (
     <main>
       <h1>My Personal Library</h1>
       <p>Mia is typing: {bookTitle}</p>
-      <form>
+      <form onSubmit={handleSubmit}>
         <label>
           Book Title:
           <input
@@ -87,8 +88,8 @@ export default function BookForm({
             onChange={(e) => setNotes(e.target.value)}
           />
         </label>
+        <button type="submit">Add Book</button>
       </form>
-      <button type="submit">Add Book</button>
     </main>
   );
 }

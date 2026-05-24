@@ -22,6 +22,30 @@ function App() {
     setBooks(data);
   }
 
+  async function handleSubmit(e) {
+    e.preventDefault();
+    await supabase.from("book_tracker").insert({
+      book_title: bookTitle,
+      author: author,
+      series_name: seriesName,
+      status: status,
+      format: format,
+      progress_note: progressNote,
+      rating: rating,
+      notes: notes,
+    });
+    await getBooks();
+
+    setBookTitle("");
+    setAuthor("");
+    setSeriesName("");
+    setStatus("");
+    setFormat("");
+    setProgressNote("");
+    setRating("");
+    setNotes("");
+  }
+
   useEffect(() => {
     getBooks();
   }, []);
@@ -45,7 +69,7 @@ function App() {
         setRating={setRating}
         notes={notes}
         setNotes={setNotes}
-
+        handleSubmit={handleSubmit}
       />
       <BookList books={books} />
     </>
