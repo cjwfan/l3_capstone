@@ -15,6 +15,7 @@ function App() {
   const [progressNote, setProgressNote] = useState("");
   const [rating, setRating] = useState("");
   const [notes, setNotes] = useState("");
+  const [editBookID, setEditBookID] = useState(null);
 
   async function getBooks() {
     const { data } = await supabase.from("book_tracker").select("*");
@@ -24,16 +25,34 @@ function App() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    await supabase.from("book_tracker").insert({
-      book_title: bookTitle,
-      author: author,
-      series_name: seriesName,
-      status: status,
-      format: format,
-      progress_note: progressNote,
-      rating: rating,
-      notes: notes,
-    });
+
+    if (editBookID) {
+      await supabase
+        .from("book_tracker")
+        .update({
+          book_title: bookTitle,
+          author: author,
+          series_name: seriesName,
+          status: status,
+          format: format,
+          progress_note: progressNote,
+          rating: rating,
+          notes: notes,
+        })
+        .eq("id", editBookID);
+      setEditBookID(null);
+    } else {
+      await supabase.from("book_tracker").insert({
+        book_title: bookTitle,
+        author: author,
+        series_name: seriesName,
+        status: status,
+        format: format,
+        progress_note: progressNote,
+        rating: rating,
+        notes: notes,
+      });
+    }
     await getBooks();
 
     setBookTitle("");
@@ -44,6 +63,23 @@ function App() {
     setProgressNote("");
     setRating("");
     setNotes("");
+  }
+
+  function handleEdit(book) {
+    setEditBookID(book.id);
+    setBookTitle(book.book_title);
+    setAuthor(book.author);
+    setSeriesName(book.series_name);
+    setStatus(book.status);
+    setFormat(book.format);
+    setProgressNote(book.progress_note);
+    setRating(book.rating);
+    setNotes(book.notes);
+  }
+
+  async function handleDelete(id) {
+    await supabase.from("book_tracker").delete().eq("id", id);
+    await getBooks();
   }
 
   useEffect(() => {
@@ -70,8 +106,13 @@ function App() {
         notes={notes}
         setNotes={setNotes}
         handleSubmit={handleSubmit}
+        editBookID={editBookID}
       />
-      <BookList books={books} />
+      <BookList
+        books={books}
+        handleDelete={handleDelete}
+        handleEdit={handleEdit}
+      />
     </>
   );
 }

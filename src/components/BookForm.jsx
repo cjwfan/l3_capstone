@@ -18,6 +18,7 @@ export default function BookForm({
   notes,
   setNotes,
   handleSubmit,
+  editBookID,
 }) {
   return (
     <main>
@@ -82,13 +83,9 @@ export default function BookForm({
         </label>
         <label>
           Notes:
-          <input
-            type="text"
-            value={notes}
-            onChange={(e) => setNotes(e.target.value)}
-          />
+          <textarea value={notes} onChange={(e) => setNotes(e.target.value)} />
         </label>
-        <button type="submit">Add Book</button>
+        <button type="submit">{editBookID ? "Update Book" : "Add Book"}</button>
       </form>
     </main>
   );
