@@ -51,19 +51,23 @@ export default function BookForm({
         </label>
         <label>
           Status:
-          <input
-            type="text"
-            value={status}
-            onChange={(e) => setStatus(e.target.value)}
-          />
+          <select value={status} onChange={(e) => setStatus(e.target.value)}>
+            <option value="tbd">TBD</option>
+            <option value="to read">To Read</option>
+            <option value="reading">Reading</option>
+            <option value="finished">Finished</option>
+            <option value="paused">Paused</option>
+            <option value="Did not finish">Did Not Finish</option>
+          </select>
         </label>
         <label>
           Format:
-          <input
-            type="text"
-            value={format}
-            onChange={(e) => setFormat(e.target.value)}
-          />
+          <select value={format} onChange={(e) => setFormat(e.target.value)}>
+            <option value="tbd">TBD</option>
+            <option value="physical">Physical</option>
+            <option value="ebook">E-book</option>
+            <option value="audiobook">Audiobook</option>
+          </select>
         </label>
         <label>
           Progress Note:
@@ -75,11 +79,16 @@ export default function BookForm({
         </label>
         <label>
           Rating:
-          <input
-            type="text"
-            value={rating}
-            onChange={(e) => setRating(e.target.value)}
-          />
+          <select value={rating} onChange={(e) => setRating(e.target.value)}>
+            <option value="TBD">TBD</option>
+            <option value="Bring it Back">Bring it back</option>
+            <option value="Meh">Meh</option>
+            <option value="Missed it by that Much">
+              Missed it by that Much
+            </option>
+            <option value="Solid">Solid</option>
+            <option value="Tell the World!">Tell the World!</option>
+          </select>
         </label>
         <label>
           Notes:
