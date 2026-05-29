@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import { supabase } from "./supabase";
 
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import SplashPage from "./pages/SplashPage";
 import MyLibrary from "./pages/MyLibrary";
 
@@ -132,6 +132,7 @@ function App() {
           />
         }
       />
+      <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );
 }
