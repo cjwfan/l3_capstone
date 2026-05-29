@@ -1,16 +1,18 @@
-# React + Vite
+# My Personal Library
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+My Personal Library is an app for tracking books. A user can save books they want to read, books they are currently reading, books they finished, paused books, and books they did not finish.
 
-Currently, two official plugins are available:
+## How to Run the Project
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+1. Install dependencies: npm install
+2. npm run dev then open the url
 
-## React Compiler
+## How to use the App
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. Open the app.
+2. Click View My Library on the splash page.
+3. Fill out the book form.
+4. Click Add Book to save a new book.
+5. Click Edit to update an existing book.
+6. Click Cancel Edit if you do not want to finish editing.
+7. Click Delete to remove a book.
