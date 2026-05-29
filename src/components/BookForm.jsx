@@ -19,28 +19,33 @@ export default function BookForm({
   setNotes,
   handleSubmit,
   editBookID,
+  handleCancelEdit,
 }) {
   return (
-    <main>
+    <main className="page">
       <h1>My Personal Library</h1>
-      <p>Mia is typing: {bookTitle}</p>
-      <form onSubmit={handleSubmit}>
+
+      <form onSubmit={handleSubmit} className="book-form">
         <label>
           Book Title:
           <input
             type="text"
             value={bookTitle}
             onChange={(e) => setBookTitle(e.target.value)}
+            required
           />
         </label>
+
         <label>
           Author:
           <input
             type="text"
             value={author}
             onChange={(e) => setAuthor(e.target.value)}
+            required
           />
         </label>
+
         <label>
           Series Name:
           <input
@@ -49,17 +54,19 @@ export default function BookForm({
             onChange={(e) => setSeriesName(e.target.value)}
           />
         </label>
+
         <label>
           Status:
           <select value={status} onChange={(e) => setStatus(e.target.value)}>
-            <option value="tbd">TBD</option>
-            <option value="to read">To Read</option>
-            <option value="reading">Reading</option>
-            <option value="finished">Finished</option>
-            <option value="paused">Paused</option>
+            <option value="TBD">TBD</option>
+            <option value="To Read">To Read</option>
+            <option value="Reading">Reading</option>
+            <option value="Finished">Finished</option>
+            <option value="Paused">Paused</option>
             <option value="Did not finish">Did Not Finish</option>
           </select>
         </label>
+
         <label>
           Format:
           <select value={format} onChange={(e) => setFormat(e.target.value)}>
@@ -69,14 +76,17 @@ export default function BookForm({
             <option value="audiobook">Audiobook</option>
           </select>
         </label>
+
         <label>
-          Progress Note:
+          Progress Note (e.g., last chapter read, page number, etc.):
           <input
             type="text"
             value={progressNote}
             onChange={(e) => setProgressNote(e.target.value)}
+            className="form-control"
           />
         </label>
+
         <label>
           Rating:
           <select value={rating} onChange={(e) => setRating(e.target.value)}>
@@ -90,11 +100,20 @@ export default function BookForm({
             <option value="Tell the World!">Tell the World!</option>
           </select>
         </label>
+
         <label>
           Notes:
           <textarea value={notes} onChange={(e) => setNotes(e.target.value)} />
         </label>
+        <div className="form-buttons">
+
         <button type="submit">{editBookID ? "Update Book" : "Add Book"}</button>
+        {editBookID && (
+          <button type="button" onClick={handleCancelEdit}>
+            Cancel Edit
+          </button>
+        )}
+        </div>
       </form>
     </main>
   );

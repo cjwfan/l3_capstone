@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 
 import "./App.css";
 import { supabase } from "./supabase";
-import BookForm from "./components/BookForm";
-import BookList from "./components/BookList";
+
+import { Route, Routes } from "react-router-dom";
+import SplashPage from "./pages/SplashPage";
+import MyLibrary from "./pages/MyLibrary";
 
 function App() {
   const [books, setBooks] = useState([]);
@@ -76,6 +78,17 @@ function App() {
     setRating(book.rating);
     setNotes(book.notes);
   }
+  function handleCancelEdit() {
+    setEditBookID(null);
+    setBookTitle("");
+    setAuthor("");
+    setSeriesName("");
+    setStatus("");
+    setFormat("");
+    setProgressNote("");
+    setRating("");
+    setNotes("");
+  }
 
   async function handleDelete(id) {
     await supabase.from("book_tracker").delete().eq("id", id);
@@ -87,33 +100,39 @@ function App() {
   }, []);
 
   return (
-    <>
-      <BookForm
-        bookTitle={bookTitle}
-        setBookTitle={setBookTitle}
-        author={author}
-        setAuthor={setAuthor}
-        seriesName={seriesName}
-        setSeriesName={setSeriesName}
-        status={status}
-        setStatus={setStatus}
-        format={format}
-        setFormat={setFormat}
-        progressNote={progressNote}
-        setProgressNote={setProgressNote}
-        rating={rating}
-        setRating={setRating}
-        notes={notes}
-        setNotes={setNotes}
-        handleSubmit={handleSubmit}
-        editBookID={editBookID}
+    <Routes>
+      <Route path="/" element={<SplashPage />} />
+
+      <Route
+        path="/library"
+        element={
+          <MyLibrary
+            bookTitle={bookTitle}
+            setBookTitle={setBookTitle}
+            author={author}
+            setAuthor={setAuthor}
+            seriesName={seriesName}
+            setSeriesName={setSeriesName}
+            status={status}
+            setStatus={setStatus}
+            format={format}
+            setFormat={setFormat}
+            progressNote={progressNote}
+            setProgressNote={setProgressNote}
+            rating={rating}
+            setRating={setRating}
+            notes={notes}
+            setNotes={setNotes}
+            handleSubmit={handleSubmit}
+            editBookID={editBookID}
+            books={books}
+            handleDelete={handleDelete}
+            handleEdit={handleEdit}
+            handleCancelEdit={handleCancelEdit}
+          />
+        }
       />
-      <BookList
-        books={books}
-        handleDelete={handleDelete}
-        handleEdit={handleEdit}
-      />
-    </>
+    </Routes>
   );
 }
 
